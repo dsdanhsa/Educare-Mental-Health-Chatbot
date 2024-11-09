@@ -1,0 +1,179 @@
+<!-- chatbot/templates/chatbot/index.html -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>EduCare Bot</title>
+  <link rel="shortcut icon" href="{% static 'img/mhcicon.png' %}" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+  <div class="title">
+    <img src="{% static 'img/logoeducare.png' %}" alt="EduCare Logo" style="width: 500px; height: 160px; vertical-align: middle; margin-right: 10px;">
+    <h3 style="color: #2baadf;">Chatbot</h3>
+  </div>
+
+  <div id="chatbot" class="main-card collapsed">
+    <button id="chatbot_toggle">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M0 0h24v24H0V0z" fill="none"/>
+        <path d="M15 4v7H5.17l-.59.59-.58.58V4h11m1-2H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm5 4h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1z"/>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+        <path d="M0 0h24v24H0V0z" fill="none"/>
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+      </svg>
+    </button>
+    <div class="main-title">
+      <div>
+        {% comment %} <svg viewBox="0 0 640 512" title="robot">
+          <path fill="currentColor" d="M32,224H64V416H32A31.96166,31.96166,0,0,1,0,384V256A31.96166,31.96166,0,0,1,32,224Zm512-48V448a64.06328,64.06328,0,0,1-64,64H160a64.06328,64.06328,0,0,1-64-64V176a79.974,79.974,0,0,1,80-80H288V32a32,32,0,0,1,64,0V96H464A79.974,79.974,0,0,1,544,176ZM264,256a40,40,0,1,0-40,40A39.997,39.997,0,0,0,264,256Zm-8,128H192v32h64Zm96,0H288v32h64ZM456,256a40,40,0,1,0-40,40A39.997,39.997,0,0,0,456,256Zm-8,128H384v32h64ZM640,256V384a31.96166,31.96166,0,0,1-32,32H576V224h32A31.96166,31.96166,0,0,1,640,256Z" />
+        </svg> {% endcomment %}
+      </div>
+      <span>
+        <img src="{% static 'img/logoeducare.png' %}" alt="Bot Icon" style="height: 24px; width: auto; vertical-align: middle; margin-right: 8px;">
+        EduCare Bot
+      </span>      
+    </div>
+
+    <main class="msger-chat">
+      <div class="msg left-msg">
+        {% comment %} <div class="msg-img" style="background-image: url('https://image.flaticon.com/icons/svg/327/327779.svg')"></div> {% endcomment %}
+        <div class="msg-img" style="
+            width: 120px;
+            height: 50px;
+            margin-right: 10px;
+            background: #ddd;
+            background-image: url('{% static 'img/mhcicon.png' %}');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            border-radius: 50%;
+        "></div>
+
+
+        <div class="msg-bubble">
+          <div class="msg-info">
+            <div class="msg-info-name">EduCare Bot</div>
+            <div class="msg-info-time"><time id="clock"></time></div>
+          </div>
+          <div class="msg-text">
+            Welcome to EduCare, a safe and supportive space where you can share your thoughts and feelings without fear of judgement.
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <form class="msger-inputarea">
+      <input type="text" class="msger-input" id="textInput" placeholder="Enter your message...">
+      <button type="submit" class="msger-send-btn">Send</button>
+    </form>
+
+    <!-- Font Awesome -->
+    <script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+    <!-- Bot JavaScript -->
+    {% comment %} <script src="{% static 'js/bot.js' %}"></script> {% endcomment %}
+  </div> <!-- Đóng div id="chatbot" -->
+
+
+<script>
+    $(document).ready(function() {
+        // Update time function
+        function updateTime() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            document.getElementById('clock').textContent = hours + ':' + minutes.toString().padStart(2, '0');
+        }
+        setInterval(updateTime, 1000);
+
+        // Toggle chatbot visibility
+        var running = false;
+        document.getElementById("chatbot_toggle").onclick = function() {
+            var chatbot = document.getElementById("chatbot");
+            var toggleIcons = document.getElementById("chatbot_toggle").children;
+            if (chatbot.classList.contains("collapsed")) {
+                chatbot.classList.remove("collapsed");
+                toggleIcons[0].style.display = "none";
+                toggleIcons[1].style.display = "";
+                setTimeout(function() { appendMessage(BOT_NAME, BOT_IMG, "left", "Hi") }, 1000);
+            } else {
+                chatbot.classList.add("collapsed");
+                toggleIcons[0].style.display = "";
+                toggleIcons[1].style.display = "none";
+            }
+        };
+
+        // Messaging variables
+        const msgerChat = $(".msger-chat");
+        const BOT_IMG = "{% static 'img/mhcicon.png' %}";
+        const PERSON_IMG = "{% static 'img/person.png' %}";
+        const BOT_NAME = "EduCare Bot";
+        const PERSON_NAME = "You";
+
+        // Append message function
+        function appendMessage(name, img, side, text) {
+            const msgHTML = `
+                <div class="msg ${side}-msg">
+                    <div class="msg-img" style="background-image: url(${img})"></div>
+                    <div class="msg-bubble">
+                        <div class="msg-info">
+                            <div class="msg-info-name">${name}</div>
+                            <div class="msg-info-time">${formatDate(new Date())}</div>
+                        </div>
+                        <div class="msg-text">${text}</div>
+                    </div>
+                </div>`;
+            msgerChat.append(msgHTML);
+            msgerChat.scrollTop(msgerChat[0].scrollHeight);
+        }
+
+        // Send button and Enter key handling
+        $('.msger-send-btn').click(function(e) {
+            e.preventDefault();
+            let userText = $('#textInput').val();
+            if (userText.trim() === "") {
+                return;
+            }
+            $('#textInput').val('');
+            appendMessage(PERSON_NAME, PERSON_IMG, "right", userText);
+            botResponse(userText);
+        });
+
+        $('#textInput').keypress(function(e) {
+            if (e.which == 13) {
+                $('.msger-send-btn').click();
+            }
+        });
+
+        // Bot response function
+        function botResponse(userText) {
+            $.ajax({
+                url: '{% url "get_bot_response" %}',
+                data: { 'msg': userText },
+                dataType: 'json',
+                success: function(data) {
+                    appendMessage(BOT_NAME, BOT_IMG, "left", data.response);
+                },
+                error: function() {
+                    appendMessage(BOT_NAME, BOT_IMG, "left", "Đã xảy ra lỗi.");
+                }
+            });
+        }
+
+        // Format date utility
+        function formatDate(date) {
+            const h = "0" + date.getHours();
+            const m = "0" + date.getMinutes();
+            return `${h.slice(-2)}:${m.slice(-2)}`;
+        }
+    });
+</script>
+</body>
+</html>

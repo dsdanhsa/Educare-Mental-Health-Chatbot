@@ -1,0 +1,16 @@
+2024-11-09 16:01:26,369 INFO:Model loaded successfully from D:\Project\DjChatBox\EduCare\EduCare\File\model.h5
+2024-11-09 16:01:26,369 INFO:Intents loaded successfully from D:\Project\DjChatBox\EduCare\EduCare\File\intents.json
+2024-11-09 16:01:26,374 INFO:Words loaded successfully from D:\Project\DjChatBox\EduCare\EduCare\File\texts.pkl
+2024-11-09 16:01:26,374 INFO:Classes loaded successfully from D:\Project\DjChatBox\EduCare\EduCare\File\labels.pkl
+2024-11-09 16:01:31,901 INFO:Model loaded successfully from D:\Project\DjChatBox\EduCare\EduCare\File\model.h5
+2024-11-09 16:01:31,902 INFO:Intents loaded successfully from D:\Project\DjChatBox\EduCare\EduCare\File\intents.json
+2024-11-09 16:01:31,902 INFO:Words loaded successfully from D:\Project\DjChatBox\EduCare\EduCare\File\texts.pkl
+2024-11-09 16:01:31,906 INFO:Classes loaded successfully from D:\Project\DjChatBox\EduCare\EduCare\File\labels.pkl
+2024-11-09 16:02:26,643 INFO:Model loaded successfully from D:\Project\DjChatBox\EduCare\EduCare\File\model.h5
+2024-11-09 16:02:26,644 INFO:Intents loaded successfully from D:\Project\DjChatBox\EduCare\EduCare\File\intents.json
+2024-11-09 16:02:26,645 INFO:Words loaded successfully from D:\Project\DjChatBox\EduCare\EduCare\File\texts.pkl
+2024-11-09 16:02:26,645 INFO:Classes loaded successfully from D:\Project\DjChatBox\EduCare\EduCare\File\labels.pkl
+2024-11-09 16:02:36,924 INFO:User input: hi
+2024-11-09 16:02:37,536 INFO:Detected language in chatbot_response: sw
+2024-11-09 16:02:38,884 INFO:Bot response in English: Hello there. Tell me how are you feeling today?
+2024-11-09 16:02:38,884 INFO:Bot response: Hello there. Tell me how are you feeling today?
