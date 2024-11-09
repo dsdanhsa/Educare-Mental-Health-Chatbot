@@ -20,9 +20,6 @@ Educare’s specialized focus on supporting students with depression has the pot
 Educare ensures that all students have access to help and support whenever they need it, fostering a more supportive and understanding educational community.
 
 # How to run it?
-
-First step is to download the models from the link <a href="https://drive.google.com/drive/folders/1ybwgK1XNG1wd8As0m9vjMdQfHmD6E9uk?usp=sharing"> MODEL </a> add the model in the root project directory.
-
 The following instructions were tested on the Windows and Linux with Python 3.11
 To get started with Educare:
 
@@ -32,11 +29,11 @@ To get started with Educare:
     ```bash
     git clone https://github.com/dsdanhsa/Educare-Mental-Health-Chatbot.git
     ```
+    cd EduCare
 2. **Install requirements**:
     ```
     pip install  -r requirements.txt
     ```
-    cd EduCare
 3. **Create and activate virtual environment**:
     ```
     python -m venv venv
